@@ -4,10 +4,10 @@ Create an ensemble of IFS initial conditions from an existing initial state by c
 a random mode of a variable at a certain level with a certain amount. By default the temperature for a random mode at level 30 is changed by 0.1K.
 
 ``` bash
-$ ~/new_initial_conditions.py --help                              
-usage: new_initial_conditions.py [-h] -i INITIALSTATE -e EXPERIMENT -o
-                                 OUTPUTDIR [-m MEMBERS] [-s SEED] [-f]
-                                 [-v VARIABLE] [-l LEVEL] [-p PERTURBATION]
+$ ./ifs_perturb.py --help                              
+usage: ifs_perturb.py [-h] -i INITIALSTATE -e EXPERIMENT -o
+                           OUTPUTDIR [-m MEMBERS] [-s SEED] [-f]
+                           [-v VARIABLE] [-l LEVEL] [-p PERTURBATION]
 
 optional arguments:
   -h, --help            show this help message and exit
