@@ -43,6 +43,32 @@ Okay, so the `{path}/init` directory contains initial conditions for an ec-earth
 ```bash
 ./ifs_perturb.py -i {path}/init/ECE3 -e ECE3 -o {path}/init -m 10 -s 3
 ```
-During the process the following output is printed to the screen:
+During the process the following output (or similar) is printed to the screen:
 ```
+Perturbed ensemble ECE3_1, variable t, mode 87520, level 30, by amount -0.1
+
+Perturbed ensemble ECE3_2, variable t, mode 77486, level 30, by amount 0.1
+
+Perturbed ensemble ECE3_3, variable t, mode 256808, level 30, by amount 0.1
+
+Perturbed ensemble ECE3_4, variable t, mode 52684, level 30, by amount -0.1
+
+Perturbed ensemble ECE3_5, variable t, mode 75746, level 30, by amount -0.1
+
+Perturbed ensemble ECE3_6, variable t, mode 109472, level 30, by amount -0.1
+
+Perturbed ensemble ECE3_7, variable t, mode 115342, level 30, by amount 0.1
+
+Perturbed ensemble ECE3_8, variable t, mode 87138, level 30, by amount -0.1
+
+Perturbed ensemble ECE3_9, variable t, mode 70918, level 30, by amount 0.1
+
+Perturbed ensemble ECE3_10, variable t, mode 194380, level 30, by amount 0.1
+
 ```
+The {path}/init directory now contains initial conditions for all members of the perturbed ensemble. The name for each member is based on the original experiment name adding an underscore and the member number:
+```bash
+[]$ ls {path}/init
+ECE3  ECE3_1  ECE3_10  ECE3_2  ECE3_3  ECE3_4  ECE3_5  ECE3_6  ECE3_7  ECE3_8  ECE3_9
+```
+Each directory contains a log file with sha256 checksums of all input and output files as well as information on how the results were created.
