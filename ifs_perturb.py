@@ -90,8 +90,6 @@ def main(istate, iexp, outdir, members, seed, var='t',
     nmodes = len(messages_in[0].values)
     # seed the random generator
     np.random.seed(seed)
-    # random sign of perturbation
-    pert = np.random.choice([-1, 1]) * pert
     # pick random even modes
     modes = np.random.choice(range(0, nmodes, 2), members, replace=False)
     # define input file
@@ -111,6 +109,8 @@ def main(istate, iexp, outdir, members, seed, var='t',
         log['input'] = ["[Input] sha256 {}: {}\n".format
                         (file_in, file_in_sha256)]
         log['output'] = []
+        # randomize sign of perturbation
+        pert = np.random.choice([-1, 1]) * pert
         # list of outputfiles to copy that don't need to be modified
         oFiles = ["ICMGG{}INIT", "ICMGG{}INIUA"]
         for oFile in oFiles:
@@ -158,17 +158,17 @@ def main(istate, iexp, outdir, members, seed, var='t',
         # test if perturbation was a success
         if testPerturbation(file_in, fileOut, var, level, mode):
             msg = (("\nPerturbed ensemble {}, variable {}, mode {}, " +
-                    "level {}, by amount {}\n").format
+                    "level {}, by amount {}. ").format
                    (expName, var, mode, level, pert))
             print(msg)
             logger.write(msg)
             msg = (("Random seed {} was used to create the perturbed " +
-                    "initial state\n").format(seed))
+                    "initial state.\n").format(seed))
             logger.write(msg)
             logger.close()
         else:
             msg = (("Perturbation failed: input file {} and output file {}" +
-                   " are the same\n").format(file_in, fileOut))
+                   " are the same.\n").format(file_in, fileOut))
             logger.write("\n {}".format(msg))
             logger.close()
             raise IOError(msg)
