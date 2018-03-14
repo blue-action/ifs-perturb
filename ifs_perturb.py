@@ -6,6 +6,8 @@ import pygrib
 import os
 import shutil
 import hashlib
+import string
+import random
 
 '''
 description:    Create an ensemble of IFS initial conditions from an existing
@@ -54,6 +56,14 @@ def sha256_checksum(filename, block_size=65536):
     return sha256.hexdigest()
 
 
+def expName_generator(size=4, chars=string.ascii_uppercase + string.digits):
+    '''
+    Return experiment name,
+    a combination of uppercase letters and numbers of length 4
+    '''
+    return ''.join(random.choice(chars) for _ in range(size))
+
+
 def main(istate, iexp, outdir, members, seed, var='t',
          level=30, pert=0.1, force=False):
     """
@@ -90,12 +100,13 @@ def main(istate, iexp, outdir, members, seed, var='t',
     nmodes = len(messages_in[0].values)
     # seed the random generator
     np.random.seed(seed)
+    random.seed(seed)
     # pick random even modes
     modes = np.random.choice(range(0, nmodes, 2), members, replace=False)
     # define input file
     for idx, mode in enumerate(modes):
         # define new experiment name
-        expName = iexp + '_' + str(idx + 1)
+        expName = expName_generator()
         # output directory experiment
         outDirExp = os.path.join(outdir, expName)
         # remove directory if exists and force==True
